@@ -3,7 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "main.h"
 
 int main(int ac, char **argv){
     char *prompt = "(shell) $ ";
@@ -15,14 +14,12 @@ int main(int ac, char **argv){
     char *token;
     int i;
 
-    /* declaring void variables */
     (void)ac;
 
     while (1) {
         printf("%s", prompt);
         n_read = getline(&lineptr, &n, stdin);
-        if (nchars_read == -1){
-            printf("Exiting shell....\n");
+        if (n_read == -1){
             return (-1);
         }
 
