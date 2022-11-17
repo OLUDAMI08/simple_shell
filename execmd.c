@@ -30,10 +30,10 @@ void execmd(char **arg)
 	if (pid == 0)
 	{
 		execve(actual_cmd, arg, NULL);
-	perror("Error:"	);
-        exit(1);
+	perror("Error:");
+	exit(1);
 	}
-	else if (pid > 0) 
+	else if (pid > 0)
 	{
 	do {
 		waitpid(pid, &status, WUNTRACED);
@@ -41,5 +41,4 @@ void execmd(char **arg)
 	}
 	else
 		perror("Error:");
-	return;
 }
