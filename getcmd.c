@@ -1,6 +1,6 @@
 #include "main.h"
 
- /**
+/**
  * getcmd - gets commands to be executed
  * @line: full command
  * @delim: character that seperates commands
