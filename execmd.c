@@ -11,8 +11,6 @@ void execmd(char **arg)
 	char *exit_s, *cmd = NULL, *actual_cmd = NULL;
 	int status;
 
-	if (arg)
-	{
 		cmd = arg[0];
 		exit_s = "exit";
 		if (!strcmp(cmd, exit_s))
@@ -23,23 +21,26 @@ void execmd(char **arg)
 			perror("./shell");
 			return;
 		}
-		else
 		pid = fork();
+		if (pid == -1)
+		{
+			perror(arg[0]);
+			exit(1);
+		}
 	if (!pid)
 	{
 		execve(actual_cmd, arg, NULL);
 		perror("./shell");
+		for (i = 0 ; arg[i] ; i++;)
+			free(arg[i]);
+		free(arg);
 		exit(1);
 	}
-	else if (pid > 0)
+	if (WEXITED(status))
 	{
-		do {
-			waitpid(pid, &status, WUNTRACED);
-		}
-		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-			;
+		WEXITSTATUS(status);
 	}
-	else
-		perror("./shell");
-	}
+	for (i = 0 ; arg[i] ; i++)
+		free(arg[i]);
+	free(arg);
 }

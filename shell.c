@@ -9,7 +9,7 @@
 
 int main(int ac, char **argv)
 {
-	char *prompt = "(shell) $ ";
+	char *prompt = "($) ";
 	char *lineptr = NULL;
 	size_t n = 0;
 	ssize_t n_read;
