@@ -8,13 +8,11 @@
 
 char *_getenv(const char *name)
 {
-	int j, i = 0;
+	int i = 0;
 	extern char **environ;
 	char *string;
 	int position;
 
-	position = strlen(name) + 1;
-	printf("position = %d\n", position);
 	while (environ[i])
 	{
 		string = strstr(environ[i], name);

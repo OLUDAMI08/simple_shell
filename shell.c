@@ -9,19 +9,18 @@
 
 int main(int ac, char **argv)
 {
-	char *prompt = "(shell) $ ";
-	char *lineptr = NULL;
+	char *lineptr = NULL, *PATH = NULL;
 	size_t n = 0;
 	ssize_t n_read;
 	const char *delim = " \n";
 
+	signal(SIGINT, SIG_IGN);
+	PATH = _getenv("PATH");
+	if (PATH == NULL)
+		return (-1);
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
-		{
-			if (ac == 1)
-			printf("%s", prompt);
-		}
+		prompt();
 		n_read = getline(&lineptr, &n, stdin);
 		if (n_read == -1)
 		{

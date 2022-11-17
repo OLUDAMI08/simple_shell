@@ -9,14 +9,19 @@ void execmd(char **arg)
 {
 	pid_t pid;
 	char *exit_s, *cmd = NULL, *actual_cmd = NULL;
-	int status;
+	int status, i;
 
 	if (arg)
 	{
 		cmd = arg[0];
 		exit_s = "exit";
 		if (!strcmp(cmd, exit_s))
+		{
+			for (i = 0; arg[i]; i++)
+				free(arg[i]);
+			free(arg[i]);
 			exit(0);
+		}
 		actual_cmd = getpath(cmd);
 		if (actual_cmd == NULL)
 		{
@@ -28,7 +33,6 @@ void execmd(char **arg)
 	if (!pid)
 	{
 		execve(actual_cmd, arg, NULL);
-		perror("Error");
 		exit(1);
 	}
 	else if (pid > 0)
