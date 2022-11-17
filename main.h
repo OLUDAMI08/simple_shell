@@ -9,5 +9,7 @@
 #include <string.h>
 
 char *getpath(char *cmd);
+char **getcmd(char *lineptr_copy, const char *delim, ssize_t nread);
+void execmd(char **arg);
 
 #endif
