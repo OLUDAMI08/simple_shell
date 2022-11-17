@@ -27,9 +27,13 @@ void execmd(char **arg)
 			perror("Error");
 			return;
 		}
-		else
 		pid = fork();
-	if (!pid)
+		if (pid == -1)
+		{
+			perror(arg[0]);
+			exit(1);
+		}
+	if (pid == 0)
 	{
 		execve(actual_cmd, arg, NULL), exit(1);
 	}

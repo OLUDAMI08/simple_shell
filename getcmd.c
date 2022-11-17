@@ -1,10 +1,10 @@
 #include "main.h"
 
-/**
- * getcmd - Gets commands to be executed
+ /**
+ * getcmd - gets commands to be executed
  * @line: full command
  * @delim: character that seperates commands
- * @nread: number of bytes
+ * @nread: number of bytes read
  * Return: pointer to command
  */
 
