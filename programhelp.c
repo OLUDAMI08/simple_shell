@@ -40,9 +40,9 @@ char *_read(void)
 		}
 	}
 	position = nread - 1;
-	if (buf[position] == '\n' || buf[position] == '\t')
+	if (buf[position] == '\n' || buf[position] == '\t' || buf[position] == ' ')
 		buf[position] = '\0';
-	for(i = 0 ; buf[i] ; i++)
+	for (i = 0 ; buf[i] ; i++)
 	{
 		if (buf[i] == '#' && buf[i - 1] == ' ')
 		{

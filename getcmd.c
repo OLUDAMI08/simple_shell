@@ -1,9 +1,10 @@
 #include "main.h"
 
-/*
+/**
  * getcmd - Gets commands to be executed
  * @line: full command
  * @delim: character that seperates commands
+ * @nread: number of bytes
  * Return: pointer to command
  */
 
@@ -21,7 +22,7 @@ char **getcmd(char *line, const char *delim, ssize_t nread)
 	strcpy(lineptr_copy, line);
 	token = strtok(line, delim);
 
-        while (token != NULL)
+	while (token != NULL)
 	{
 		num_tokens++;
 		token = strtok(NULL, delim);

@@ -9,14 +9,12 @@
 
 int main(int ac, char **argv)
 {
-	char *lineptr = NULL, *PATH = NULL;
+	char *lineptr = NULL;
 	ssize_t n_read;
 	const char *delim = " \n";
+	(void)ac;
 
 	signal(SIGINT, SIG_IGN);
-	PATH = _getenv("PATH");
-	if (PATH == NULL)
-		return (-1);
 	while (1)
 	{
 		prompt();

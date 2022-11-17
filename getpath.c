@@ -22,10 +22,10 @@ char *getpath(char *cmd)
 	while (path_token != NULL)
 	{
 		file_path = malloc(cmd_len + dir_len + 2);
-		strcpy(file_path, path_token); 
+		strcpy(file_path, path_token);
 		strcat(file_path, "/");
 		strcat(file_path, cmd);
-		strcat(file_path, "\0"); 
+		strcat(file_path, "\0");
 		if (stat(file_path, &buf) == 0)
 		{
 			free(path_copy);

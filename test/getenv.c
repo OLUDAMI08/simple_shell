@@ -9,7 +9,6 @@
 char *_getenv(const char *name)
 {
 	int i = 0;
-	extern char **environ;
 	char *string;
 	int position;
 

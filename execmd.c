@@ -2,7 +2,7 @@
 
 /**
  * execmd - executes a command
- * @cmd: command to be executed
+ * @arg: argument passed
  */
 
 void execmd(char **arg)
@@ -13,8 +13,7 @@ void execmd(char **arg)
 
 	if (arg)
 	{
-		cmd = arg[0];
-		exit_s = "exit";
+		cmd = arg[0], exit_s = "exit";
 		if (!strcmp(cmd, exit_s))
 		{
 			for (i = 0; arg[i]; i++)
@@ -32,16 +31,13 @@ void execmd(char **arg)
 		pid = fork();
 	if (!pid)
 	{
-		execve(actual_cmd, arg, NULL);
-		exit(1);
+		execve(actual_cmd, arg, NULL), exit(1);
 	}
 	else if (pid > 0)
 	{
-		do
-		{
+		do {
 			waitpid(pid, &status, WUNTRACED);
-		}
-		while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 	}
 	else
