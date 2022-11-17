@@ -13,5 +13,6 @@ char **getcmd(char *lineptr_copy, const char *delim, ssize_t nread);
 void execmd(char **arg);
 char *_getenv(const char *name);
 void prompt(void);
+char *_read(void);
 
 #endif

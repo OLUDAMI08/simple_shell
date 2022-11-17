@@ -43,11 +43,12 @@ void execmd(char **arg)
 		}
 		while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
+	}
 	else
+	{
 		for (i = 0; arg[i]; i++)
 			free(arg[i]);
 		free(arg);
 		perror("Error");
-	
 	}
 }

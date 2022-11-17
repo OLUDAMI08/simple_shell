@@ -13,6 +13,7 @@ char *_getenv(const char *name)
 	char *string;
 	int position;
 
+	position = strlen(name) + 1;
 	while (environ[i])
 	{
 		string = strstr(environ[i], name);
