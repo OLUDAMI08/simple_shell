@@ -10,10 +10,11 @@
 
 char *getpath(char *cmd);
 char **getcmd(char *lineptr_copy, const char *delim, ssize_t nread);
-void execmd(char **arg);
+void execmd(char **arg, char *buf);
 char *_getenv(const char *name);
 void prompt(void);
 char *_read(void);
+int handle_builtin(char **arg, char *buf);
 int _strlen(char *str);
 int _strcmp(char *s1, char *s2);
 char *_strncpy(char *dest, char *src, int n);

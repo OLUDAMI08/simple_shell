@@ -52,3 +52,26 @@ char *_read(void)
 	}
 	return (buf);
 }
+
+/**
+* handle_builtin - checks for built-in command
+* @arg: argument passed on command line
+* @buf: buffer that stored argument
+* Return: 0
+*/
+
+int handle_builtin(char **arg, char *buf)
+{
+	int i;
+	char *exit_s = "exit";
+
+	if (_strcmp(arg[0], exit_s) == 0)
+	{
+		for (i = 0; arg[i]; i++)
+			free(arg[i]);
+		free(arg);
+		free(buf);
+		exit(0);
+	}
+	return (0);
+}

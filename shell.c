@@ -28,7 +28,7 @@ int main(int ac, char **argv)
 			free(lineptr);
 			continue;
 		}
-		execmd(argv);
+		execmd(argv, lineptr);
 		}
 	}
 	free(lineptr);
