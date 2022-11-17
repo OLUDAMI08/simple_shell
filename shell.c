@@ -30,6 +30,8 @@ int main(int ac, char **argv)
 		argv = getcmd(lineptr, delim, n_read);
 		if (argv == NULL)
 		{
+			free(lineptr);
+			perror("Error");
 			return (-1);
 		}
 		execmd(argv);

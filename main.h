@@ -11,5 +11,6 @@
 char *getpath(char *cmd);
 char **getcmd(char *lineptr_copy, const char *delim, ssize_t nread);
 void execmd(char **arg);
+char *_getenv(const char *name);
 
 #endif

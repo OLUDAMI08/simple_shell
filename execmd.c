@@ -20,7 +20,7 @@ void execmd(char **arg)
 		actual_cmd = getpath(cmd);
 		if (actual_cmd == NULL)
 		{
-			perror("./shell");
+			perror("Error");
 			return;
 		}
 		else
@@ -28,7 +28,7 @@ void execmd(char **arg)
 	if (!pid)
 	{
 		execve(actual_cmd, arg, NULL);
-		perror("./shell");
+		perror("Error");
 		exit(1);
 	}
 	else if (pid > 0)
@@ -40,7 +40,10 @@ void execmd(char **arg)
 		while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 	else
-		perror("./shell");
+		for (i = 0; arg[i]; i++)
+			free(arg[i]);
+		free(arg);
+		perror("Error");
 	
 	}
 }
