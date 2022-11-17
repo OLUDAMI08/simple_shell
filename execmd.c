@@ -27,20 +27,19 @@ void execmd(char **arg)
 			perror(arg[0]);
 			exit(1);
 		}
-	if (!pid)
+	if (pid == 0)
 	{
 		execve(actual_cmd, arg, NULL);
-		perror("./shell");
-		for (i = 0 ; arg[i] ; i++;)
-			free(arg[i]);
-		free(arg);
-		exit(1);
+	perror("Error:"	);
+        exit(1);
 	}
-	if (WEXITED(status))
+	else if (pid > 0) 
 	{
-		WEXITSTATUS(status);
+	do {
+		waitpid(pid, &status, WUNTRACED);
+	} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	for (i = 0 ; arg[i] ; i++)
-		free(arg[i]);
-	free(arg);
+	else
+		perror("Error:");
+	return;
 }
