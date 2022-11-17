@@ -18,20 +18,17 @@ void execmd(char **arg)
 		{
 			for (i = 0; arg[i]; i++)
 				free(arg[i]);
-			free(arg[i]);
-			exit(0);
+			free(arg[i]), exit(0);
 		}
 		actual_cmd = getpath(cmd);
 		if (actual_cmd == NULL)
 		{
-			perror("Error");
-			return;
+			perror("Error"), return;
 		}
 		pid = fork();
 		if (pid == -1)
 		{
-			perror(arg[0]);
-			exit(1);
+			perror(arg[0]), exit(1);
 		}
 	if (pid == 0)
 	{
@@ -48,7 +45,6 @@ void execmd(char **arg)
 	{
 		for (i = 0; arg[i]; i++)
 			free(arg[i]);
-		free(arg);
-		perror("Error");
+		free(arg), perror("Error");
 	}
 }
