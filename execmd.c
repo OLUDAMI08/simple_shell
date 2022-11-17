@@ -2,7 +2,7 @@
 
 /**
  * execmd - executes a command
- * @cmd: command to be executed
+ * @arg: argument
  */
 
 void execmd(char **arg)
@@ -33,14 +33,13 @@ void execmd(char **arg)
 	}
 	else if (pid > 0)
 	{
-		do
-		{
+		do {
 			waitpid(pid, &status, WUNTRACED);
 		}
-		while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			;
 	}
 	else
 		perror("./shell");
-	
 	}
 }
