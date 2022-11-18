@@ -19,7 +19,7 @@ int main(int ac, char **argv)
 	{
 		prompt();
 		lineptr = _read();
-		n_read = strlen(lineptr) + 1;
+		n_read = _strlen(lineptr) + 1;
 		if (*lineptr != '\0')
 		{
 		argv = getcmd(lineptr, delim, n_read);
