@@ -14,7 +14,7 @@ void execmd(char **arg)
 	if (arg)
 	{
 		cmd = arg[0], exit_s = "exit";
-		if (!strcmp(cmd, exit_s))
+		if (!_strcmp(cmd, exit_s))
 		{
 			for (i = 0; arg[i]; i++)
 				free(arg[i]);
