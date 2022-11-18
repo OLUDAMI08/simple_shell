@@ -11,7 +11,7 @@
 char *getpath(char *cmd);
 char **getcmd(char *lineptr_copy, const char *delim, ssize_t nread);
 void execmd(char **arg, char *buf);
-char *_getenv(const char *name);
+char *_getenv(char *name);
 void prompt(void);
 char *_read(void);
 int handle_builtin(char **arg, char *buf);
@@ -22,5 +22,5 @@ char *_strdup(const char *str);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 char *_strstr(char *haystack, char *needle);
-
+extern char **environ;
 #endif

@@ -6,16 +6,16 @@
  * Return: value of variable or NULL if not found
  */
 
-char *_getenv(const char *name)
+char *_getenv(char *name)
 {
 	int i = 0;
 	char *string;
 	int position;
 
-	position = strlen(name) + 1;
+	position = _strlen(name) + 1;
 	while (environ[i])
 	{
-		string = strstr(environ[i], name);
+		string = _strstr(environ[i], name);
 		if (string != NULL)
 			return (&string[position]);
 		i++;
