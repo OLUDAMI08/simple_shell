@@ -12,7 +12,7 @@ char *getpath(char *cmd)
 	int cmd_len, dir_len;
 	struct stat buf;
 
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	cmd_len = _strlen(cmd);
 	if (path)
 	{

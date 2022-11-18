@@ -12,9 +12,15 @@ int main(int ac, char **argv)
 	char *lineptr = NULL;
 	ssize_t n_read;
 	const char *delim = " \n";
+	char *PATH = NULL;
 	(void)ac;
 
 	signal(SIGINT, SIG_IGN);
+	PATH = _getenv("PATH");
+	if (PATH == NULL)
+	{
+		return (-1);
+	}
 	while (1)
 	{
 		prompt();
@@ -28,7 +34,7 @@ int main(int ac, char **argv)
 			free(lineptr);
 			continue;
 		}
-		execmd(argv);
+		execmd(argv, lineptr);
 		}
 	}
 	free(lineptr);
