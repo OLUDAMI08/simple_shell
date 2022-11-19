@@ -3,7 +3,7 @@
 * prompt - prints a prompt on the terminal
 */
 
-void prompt(void)
+int prompt(void)
 {
 	char *prompt = "($) ";
 	ssize_t nwrite = 0;
@@ -14,6 +14,7 @@ void prompt(void)
 		if (nwrite == -1)
 			exit(0);
 	}
+	return (0);
 }
 
 /**

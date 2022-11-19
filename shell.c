@@ -28,15 +28,20 @@ int main(int ac, char **argv)
 		n_read = _strlen(lineptr) + 1;
 		if (*lineptr != '\0')
 		{
-		argv = getcmd(lineptr, delim, n_read);
-		if (argv == NULL)
-		{
+			argv = getcmd(lineptr, delim, n_read);
+			if (argv == NULL)
+			{
+				free(lineptr);
+				continue;
+			}
+			if (execmd(argv, lineptr) == 1)
+			{
+				free(lineptr);
+				continue;
+			}
+		}
+		else
 			free(lineptr);
-			continue;
-		}
-		execmd(argv, lineptr);
-		}
 	}
-	free(lineptr);
 	return (0);
 }

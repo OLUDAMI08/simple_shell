@@ -5,13 +5,13 @@
  * @arg: argument passed
  */
 
-void execmd(char **arg, char *buf)
+int execmd(char **arg, char *buf)
 {
 	pid_t pid;
 	char *cmd = NULL, *actual_cmd = NULL;
-	int status;
+	int status, result;
 
-	if (arg)
+	if (*buf != '\0')
 	{
 		cmd = arg[0];
 		handle_builtin(arg, buf);
@@ -20,7 +20,7 @@ void execmd(char **arg, char *buf)
 		{
 			free(actual_cmd);
 			perror("Error");
-			return;
+			return (1);
 		}
 		pid = fork();
 		if (pid == -1)
@@ -29,19 +29,21 @@ void execmd(char **arg, char *buf)
 		}
 	if (pid == 0)
 	{
-		execve(actual_cmd, arg, NULL), exit(1);
+		result = execve(actual_cmd, arg, NULL);
+		if (result == -1)
+		{
+			perror(arg[0]);
+			free_arg(arg);
+			free(buf);
+			exit(127);
+		}
 	}
-	else if (pid > 0)
-	{
-		do {
-			waitpid(pid, &status, WUNTRACED);
-		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	}
-	else
-	{
-		free_arg(arg);
-		free(buf);
-		perror("Error");
-	}
+	wait(&status);
+	if (WIFEXITED(status))
+		WEXITSTATUS(status);
+	free_arg(arg);
+	free(buf);
+	perror("Error");
+	return (0);
 }
