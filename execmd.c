@@ -20,7 +20,7 @@ int execmd(char **arg, char *buf)
 		{
 			free(actual_cmd);
 			perror("Error");
-			return;
+			return (1);
 		}
 		pid = fork();
 		if (pid == -1)
