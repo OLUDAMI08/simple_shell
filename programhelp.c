@@ -67,9 +67,7 @@ int handle_builtin(char **arg, char *buf)
 
 	if (_strcmp(arg[0], exit_s) == 0)
 	{
-		for (i = 0; arg[i]; i++)
-			free(arg[i]);
-		free(arg);
+		free_arg(arg);
 		free(buf);
 		exit(0);
 	}

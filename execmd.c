@@ -9,7 +9,7 @@ void execmd(char **arg, char *buf)
 {
 	pid_t pid;
 	char *cmd = NULL, *actual_cmd = NULL;
-	int status, i;
+	int status;
 
 	if (arg)
 	{
@@ -18,6 +18,7 @@ void execmd(char **arg, char *buf)
 		actual_cmd = getpath(cmd);
 		if (actual_cmd == NULL)
 		{
+			free(actual_cmd);
 			perror("Error");
 			return;
 		}
@@ -39,8 +40,8 @@ void execmd(char **arg, char *buf)
 	}
 	else
 	{
-		for (i = 0; arg[i]; i++)
-			free(arg[i]);
-		free(arg), perror("Error");
+		free_arg(arg);
+		free(buf);
+		perror("Error");
 	}
 }

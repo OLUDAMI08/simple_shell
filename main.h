@@ -22,5 +22,9 @@ char *_strdup(const char *str);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 char *_strstr(char *haystack, char *needle);
+char *makemem(size_t memsize);
+void free_arg(char **arg);
+
 extern char **environ;
+
 #endif
