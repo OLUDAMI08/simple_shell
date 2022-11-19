@@ -5,7 +5,7 @@
  * @arg: argument passed
  */
 
-void execmd(char **arg, char *buf)
+int execmd(char **arg, char *buf)
 {
 	pid_t pid;
 	char *cmd = NULL, *actual_cmd = NULL;
@@ -44,4 +44,5 @@ void execmd(char **arg, char *buf)
 		free(buf);
 		perror("Error");
 	}
+	return (0);
 }

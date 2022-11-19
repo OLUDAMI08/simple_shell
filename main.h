@@ -10,7 +10,7 @@
 
 char *getpath(char *cmd);
 char **getcmd(char *lineptr_copy, const char *delim, ssize_t nread);
-void execmd(char **arg, char *buf);
+int execmd(char **arg, char *buf);
 char *_getenv(char *name);
 void prompt(void);
 char *_read(void);
