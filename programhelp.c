@@ -62,7 +62,6 @@ char *_read(void)
 
 int handle_builtin(char **arg, char *buf)
 {
-	int i;
 	char *exit_s = "exit";
 
 	if (_strcmp(arg[0], exit_s) == 0)
