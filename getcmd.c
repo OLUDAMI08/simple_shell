@@ -12,14 +12,9 @@ char **getcmd(char *line, const char *delim, ssize_t nread)
 {
 	char *token, **argv, *lineptr_copy;
 	int i, num_tokens = 0;
+	(void)nread;
 
-	lineptr_copy = malloc(sizeof(char) * nread + 1);
-	if (lineptr_copy == NULL)
-	{
-		perror("Error");
-		return (NULL);
-	}
-	_strcpy(lineptr_copy, line);
+	lineptr_copy = _strdup(line);
 	token = strtok(line, delim);
 
 	while (token != NULL)
@@ -29,13 +24,17 @@ char **getcmd(char *line, const char *delim, ssize_t nread)
 	}
 	num_tokens++;
 	argv = malloc(sizeof(char *) * num_tokens + 1);
+	if (argv == NULL)
+	{
+		free(line);
+		free(lineptr_copy);
+		exit(1);
+	}
 
 	token = strtok(lineptr_copy, delim);
-	for (i = 0; token != NULL; i++)
+	for (i = 0 ; token != NULL ; i++)
 	{
-	argv[i] = malloc(sizeof(char) * _strlen(token) + 1);
-	_strcpy(argv[i], token);
-
+	argv[i] = _strdup(token);
 	token = strtok(NULL, delim);
 	}
 	argv[i] = NULL;

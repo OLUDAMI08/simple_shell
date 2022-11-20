@@ -5,25 +5,22 @@
  * @arg: argument passed
  */
 
-void execmd(char **arg)
+int execmd(char **arg, char *buf)
 {
 	pid_t pid;
-	char *exit_s, *cmd = NULL, *actual_cmd = NULL;
-	int status, i;
+	char *cmd = NULL, *actual_cmd = NULL;
+	int status;
 
 	if (arg)
 	{
-		cmd = arg[0], exit_s = "exit";
-		if (!_strcmp(cmd, exit_s))
-		{
-			for (i = 0; arg[i]; i++)
-				free(arg[i]);
-			free(arg[i]), exit(0);
-		}
+		cmd = arg[0];
+		handle_builtin(arg, buf);
 		actual_cmd = getpath(cmd);
 		if (actual_cmd == NULL)
 		{
-			perror("Error"), return;
+			free(actual_cmd);
+			perror("Error");
+			return (1);
 		}
 		pid = fork();
 		if (pid == -1)
@@ -43,8 +40,9 @@ void execmd(char **arg)
 	}
 	else
 	{
-		for (i = 0; arg[i]; i++)
-			free(arg[i]);
-		free(arg), perror("Error");
+		free_arg(arg);
+		free(buf);
+		perror("Error");
 	}
+	return (0);
 }
