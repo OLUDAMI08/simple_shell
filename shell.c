@@ -34,11 +34,7 @@ int main(int ac, char **argv)
 				free(lineptr);
 				continue;
 			}
-			if ((execmd(argv, lineptr)) == 0)
-			{
-				if (isatty(STDIN_FILENO) == 0)
-					exit(0);
-			}
+			execmd(argv, lineptr);
 		}
 		else
 			free(lineptr);
