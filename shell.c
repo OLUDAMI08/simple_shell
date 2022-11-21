@@ -11,7 +11,7 @@ int main(int ac, char **argv)
 {
 	char *lineptr = NULL;
 	ssize_t n_read;
-	const char *delim = " \n";
+	const char *delim = " \t\a\r\n";
 	char *PATH = NULL;
 	(void)ac;
 
@@ -34,10 +34,10 @@ int main(int ac, char **argv)
 				free(lineptr);
 				continue;
 			}
-			if (execmd(argv, lineptr) == 1)
+			if ((execmd(argv, lineptr)) == 0)
 			{
-				free(lineptr);
-				continue;
+				if (isatty(STDIN_FILENO) == 0)
+					exit(0);
 			}
 		}
 		else
