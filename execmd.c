@@ -40,6 +40,8 @@ int execmd(char **arg, char *buf)
 			free(buf);
 			exit(126);
 		}
+		if (isatty(STDIN_FILENO) == 0)
+			_Exit(0);
 	}
 	}
 	wait(&status);
@@ -47,6 +49,8 @@ int execmd(char **arg, char *buf)
 		WEXITSTATUS(status);
 	free_arg(arg);
 	free(buf);
+	if (isatty(STDIN_FILENO) == 0)
+		_Exit(0);
 	free(actual_cmd);
 	return (0);
 }
