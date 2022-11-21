@@ -26,6 +26,8 @@ int execmd(char **arg, char *buf)
 		if (actual_cmd == NULL)
 		{
 			free(actual_cmd);
+			free_arg(arg);
+			free(buf);
 			perror("Error");
 			exit(127);
 		}
@@ -34,6 +36,7 @@ int execmd(char **arg, char *buf)
 		{
 			perror(arg[0]);
 			free_arg(arg);
+			free(actual_cmd);
 			free(buf);
 			exit(126);
 		}
@@ -44,5 +47,6 @@ int execmd(char **arg, char *buf)
 		WEXITSTATUS(status);
 	free_arg(arg);
 	free(buf);
+	free(actual_cmd);
 	return (0);
 }
