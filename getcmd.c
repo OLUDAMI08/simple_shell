@@ -32,6 +32,8 @@ char **getcmd(char *line, const char *delim, ssize_t nread)
 	}
 
 	token = strtok(lineptr_copy, delim);
+	if (token == NULL)
+		return (NULL);
 	for (i = 0 ; token != NULL ; i++)
 	{
 	argv[i] = _strdup(token);

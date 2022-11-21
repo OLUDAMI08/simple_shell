@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <signal.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <string.h>
@@ -12,7 +15,7 @@ char *getpath(char *cmd);
 char **getcmd(char *lineptr_copy, const char *delim, ssize_t nread);
 int execmd(char **arg, char *buf);
 char *_getenv(char *name);
-void prompt(void);
+int prompt(void);
 char *_read(void);
 int handle_builtin(char **arg, char *buf);
 int _strlen(char *str);

@@ -9,19 +9,13 @@ int execmd(char **arg, char *buf)
 {
 	pid_t pid;
 	char *cmd = NULL, *actual_cmd = NULL;
-	int status;
+	int status, result;
 
-	if (arg)
+	if (*buf != '\0')
 	{
 		cmd = arg[0];
 		handle_builtin(arg, buf);
 		actual_cmd = getpath(cmd);
-		if (actual_cmd == NULL)
-		{
-			free(actual_cmd);
-			perror("Error");
-			return (1);
-		}
 		pid = fork();
 		if (pid == -1)
 		{
@@ -29,20 +23,30 @@ int execmd(char **arg, char *buf)
 		}
 	if (pid == 0)
 	{
-		execve(actual_cmd, arg, NULL), exit(1);
+		if (actual_cmd == NULL)
+		{
+			free(actual_cmd);
+			free_arg(arg);
+			free(buf);
+			perror("Error");
+			exit(127);
+		}
+		result = execve(actual_cmd, arg, NULL);
+		if (result == -1)
+		{
+			perror(arg[0]);
+			free_arg(arg);
+			free(actual_cmd);
+			free(buf);
+			exit(126);
+		}
 	}
-	else if (pid > 0)
-	{
-		do {
-			waitpid(pid, &status, WUNTRACED);
-		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	}
-	else
-	{
-		free_arg(arg);
-		free(buf);
-		perror("Error");
-	}
+	wait(&status);
+	if (WIFEXITED(status))
+		WEXITSTATUS(status);
+	free_arg(arg);
+	free(buf);
+	free(actual_cmd);
 	return (0);
 }
