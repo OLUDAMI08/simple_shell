@@ -26,7 +26,7 @@ int main(int ac, char **argv)
 		prompt();
 		lineptr = _read();
 		n_read = _strlen(lineptr) + 1;
-		if (*lineptr != '\0')
+		if (lineptr != NULL)
 		{
 			argv = getcmd(lineptr, delim, n_read);
 			if (argv == NULL)
@@ -34,7 +34,8 @@ int main(int ac, char **argv)
 				free(lineptr);
 				continue;
 			}
-			execmd(argv, lineptr);
+			if (execmd(argv, lineptr) != 0)
+				continue;
 		}
 		else
 			free(lineptr);

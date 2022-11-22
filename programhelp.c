@@ -30,15 +30,12 @@ char *_read(void)
 	int i;
 
 	nread = getline(&buf, &n, stdin);
-
 	if (nread == -1)
 	{
 		free(buf);
 		if (isatty(STDIN_FILENO) != 0)
-		{
 		write(STDOUT_FILENO, "\n", 1);
 		exit(0);
-		}
 	}
 	position = nread - 1;
 	if (buf[position] == '\n' || buf[position] == '\t' || buf[position] == ' ')

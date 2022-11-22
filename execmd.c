@@ -16,6 +16,15 @@ int execmd(char **arg, char *buf)
 		cmd = arg[0];
 		handle_builtin(arg, buf);
 		actual_cmd = getpath(cmd);
+		if (actual_cmd == NULL)
+		{
+			free(actual_cmd);
+			free_arg(arg);
+			free(buf);
+			perror("Error");
+			return (127);
+		}
+
 		pid = fork();
 		if (pid == -1)
 		{
@@ -23,14 +32,6 @@ int execmd(char **arg, char *buf)
 		}
 	if (pid == 0)
 	{
-		if (actual_cmd == NULL)
-		{
-			free(actual_cmd);
-			free_arg(arg);
-			free(buf);
-			perror("Error");
-			exit(127);
-		}
 		result = execve(actual_cmd, arg, NULL);
 		if (result == -1)
 		{
@@ -40,8 +41,6 @@ int execmd(char **arg, char *buf)
 			free(buf);
 			exit(126);
 		}
-		if (isatty(STDIN_FILENO) == 0)
-			_Exit(0);
 	}
 	}
 	wait(&status);
@@ -49,8 +48,7 @@ int execmd(char **arg, char *buf)
 		WEXITSTATUS(status);
 	free_arg(arg);
 	free(buf);
-	if (isatty(STDIN_FILENO) == 0)
-		_Exit(0);
+	if (isatty(STDIN_FILENO))
 	free(actual_cmd);
 	return (0);
 }
