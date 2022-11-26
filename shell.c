@@ -31,6 +31,8 @@ int main(int ac, char **argv)
 			}
 			if (handle_builtin(argv, lineptr, exitstatus) == 1)
 			{
+				free(lineptr);
+				free_arg(argv);
 				continue;
 			}
 			exitstatus = execmd(argv, lineptr);
