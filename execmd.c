@@ -9,12 +9,11 @@ int execmd(char **arg, char *buf)
 {
 	pid_t pid;
 	char *cmd = NULL, *actual_cmd = NULL;
-	int status, result;
+	int status, result, exitstatus = 0;
 
 	if (*buf != '\0')
 	{
 		cmd = arg[0];
-		handle_builtin(arg, buf);
 		actual_cmd = getpath(cmd);
 		if (actual_cmd == NULL)
 		{
@@ -45,10 +44,10 @@ int execmd(char **arg, char *buf)
 	}
 	wait(&status);
 	if (WIFEXITED(status))
-		WEXITSTATUS(status);
+		exitstatus = WEXITSTATUS(status);
 	free_arg(arg);
 	free(buf);
 	if (isatty(STDIN_FILENO))
 	free(actual_cmd);
-	return (0);
+	return (exitstatus);
 }

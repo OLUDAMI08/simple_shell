@@ -13,6 +13,7 @@ int main(int ac, char **argv)
 	ssize_t n_read;
 	const char *delim = " \t\a\r\n";
 	char *PATH = NULL;
+	int exitstatus = 0;
 	(void)ac;
 
 	signal(SIGINT, SIG_IGN);
@@ -34,11 +35,11 @@ int main(int ac, char **argv)
 				free(lineptr);
 				continue;
 			}
-			if (execmd(argv, lineptr) != 0)
-				continue;
+			handle_builtin(argv, lineptr, exitstatus);
+			exitstatus = execmd(argv, lineptr);
 		}
 		else
 			free(lineptr);
 	}
-	return (0);
+	return (exitstatus);
 }

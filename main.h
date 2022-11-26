@@ -17,7 +17,7 @@ int execmd(char **arg, char *buf);
 char *_getenv(char *name);
 int prompt(void);
 char *_read(void);
-int handle_builtin(char **arg, char *buf);
+int handle_builtin(char **arg, char *buf, int status);
 int _strlen(char *str);
 int _strcmp(char *s1, char *s2);
 char *_strncpy(char *dest, char *src, int n);
