@@ -25,7 +25,7 @@ int execmd(char **arg, char *buf)
 		else
 		{
 			PATH = _getenv("PATH");
-			if (PATH == NULL)
+			if (PATH == NULL || !_strlen(PATH))
 			{
 				free_arg(arg);
 				free(buf);
