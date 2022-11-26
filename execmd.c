@@ -10,11 +10,19 @@ int execmd(char **arg, char *buf)
 	pid_t pid;
 	char *cmd = NULL, *actual_cmd = NULL;
 	int status, result, exitstatus = 0;
+	struct stat buffer;
+	int cmdflag = 0;
 
 	if (*buf != '\0')
 	{
 		cmd = arg[0];
-		actual_cmd = getpath(cmd);
+		if (stat(cmd, &buffer) == 0)
+		{
+			cmdflag++;
+			actual_cmd = cmd;
+		}
+		else
+			actual_cmd = getpath(cmd);
 		if (actual_cmd == NULL)
 		{
 			free(actual_cmd);
@@ -47,7 +55,7 @@ int execmd(char **arg, char *buf)
 		exitstatus = WEXITSTATUS(status);
 	free_arg(arg);
 	free(buf);
-	if (isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO) && !cmdflag)
 	free(actual_cmd);
 	return (exitstatus);
 }

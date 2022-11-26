@@ -38,8 +38,6 @@ char *getpath(char *cmd)
 		}
 	}
 	free(path_copy);
-	if (stat(cmd, &buf) == 0)
-		return (cmd);
 	return (NULL);
 	}
 	return (NULL);

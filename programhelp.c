@@ -61,12 +61,22 @@ char *_read(void)
 int handle_builtin(char **arg, char *buf, int status)
 {
 	char *exit_s = "exit";
+	char *env_s = "env";
+	int i;
 
 	if (_strcmp(arg[0], exit_s) == 0)
 	{
 		free_arg(arg);
 		free(buf);
 		exit(status);
+	}
+	if (_strcmp(arg[0], env_s) == 0)
+	{
+		for (i = 0 ; environ[i] ; i++)
+		{
+		write(1, environ[i], _strlen(environ[i]));
+		write(1, "\n", 1);
+		}
 	}
 	return (0);
 }
