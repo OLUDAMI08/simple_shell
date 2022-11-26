@@ -55,7 +55,7 @@ int execmd(char **arg, char *buf)
 		exitstatus = WEXITSTATUS(status);
 	free_arg(arg);
 	free(buf);
-	if (isatty(STDIN_FILENO) && !cmdflag)
+	if (!cmdflag)
 	free(actual_cmd);
 	return (exitstatus);
 }
