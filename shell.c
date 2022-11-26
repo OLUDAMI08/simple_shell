@@ -12,16 +12,10 @@ int main(int ac, char **argv)
 	char *lineptr = NULL;
 	ssize_t n_read;
 	const char *delim = " \t\a\r\n";
-	char *PATH = NULL;
 	int exitstatus = 0;
 	(void)ac;
 
 	signal(SIGINT, SIG_IGN);
-	PATH = _getenv("PATH");
-/**	if (PATH == NULL)
-	{
-		return (-1);
-	}*/
 	while (1)
 	{
 		prompt();
