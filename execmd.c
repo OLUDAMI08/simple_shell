@@ -9,6 +9,7 @@ int execmd(char **arg, char *buf)
 {
 	pid_t pid;
 	char *cmd = NULL, *actual_cmd = NULL;
+	char *PATH;
 	int status, result, exitstatus = 0;
 	struct stat buffer;
 	int cmdflag = 0;
@@ -22,7 +23,17 @@ int execmd(char **arg, char *buf)
 			actual_cmd = cmd;
 		}
 		else
+		{
+			PATH = _getenv("PATH");
+			if (PATH == NULL)
+			{
+				free_arg(arg);
+				free(buf);
+				perror("Error");
+				return (127);
+			}
 			actual_cmd = getpath(cmd);
+		}
 		if (actual_cmd == NULL)
 		{
 			free(actual_cmd);

@@ -22,7 +22,7 @@ int prompt(void)
 * Return: buffer input was read into or NULL on failure
 */
 
-char *_read(void)
+char *_read(int status)
 {
 	ssize_t position, nread = 0;
 	char *buf = NULL;
@@ -35,7 +35,7 @@ char *_read(void)
 		free(buf);
 		if (isatty(STDIN_FILENO) != 0)
 		write(STDOUT_FILENO, "\n", 1);
-		exit(0);
+		exit(status);
 	}
 	position = nread - 1;
 	if (buf[position] == '\n' || buf[position] == '\t' || buf[position] == ' ')

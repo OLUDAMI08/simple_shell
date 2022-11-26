@@ -19,7 +19,7 @@ int main(int ac, char **argv)
 	while (1)
 	{
 		prompt();
-		lineptr = _read();
+		lineptr = _read(exitstatus);
 		n_read = _strlen(lineptr) + 1;
 		if (lineptr != NULL)
 		{
