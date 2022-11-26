@@ -17,10 +17,10 @@ int main(int ac, char **argv)
 
 	signal(SIGINT, SIG_IGN);
 	PATH = _getenv("PATH");
-	if (PATH == NULL)
+/**	if (PATH == NULL)
 	{
 		return (-1);
-	}
+	}*/
 	while (1)
 	{
 		prompt();

@@ -30,6 +30,7 @@ char *_read(void)
 	int i;
 
 	nread = getline(&buf, &n, stdin);
+	printf("nr: %ld\n", nread);
 	if (nread == -1)
 	{
 		free(buf);
