@@ -16,11 +16,6 @@ int main(int ac, char **argv)
 	(void)ac;
 
 	signal(SIGINT, SIG_IGN);
-	if (*environ == NULL)
-	{
-		perror("Errror");
-		return (1);
-	}
 	while (1)
 	{
 		prompt();
