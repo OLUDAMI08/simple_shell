@@ -58,7 +58,7 @@ char *_read(void)
 * Return: 0
 */
 
-int handle_builtin(char **arg, char *buf)
+int handle_builtin(char **arg, char *buf, int status)
 {
 	char *exit_s = "exit";
 
@@ -66,7 +66,7 @@ int handle_builtin(char **arg, char *buf)
 	{
 		free_arg(arg);
 		free(buf);
-		exit(0);
+		exit(status);
 	}
 	return (0);
 }
