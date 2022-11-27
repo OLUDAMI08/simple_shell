@@ -5,7 +5,7 @@
  * @arg: argument passed
  */
 
-int execmd(char **arg, char *buf)
+int execmd(char **arg, char *buf, info_t *info)
 {
 	pid_t pid;
 	char *cmd = NULL, *actual_cmd = NULL;
@@ -29,7 +29,7 @@ int execmd(char **arg, char *buf)
 			{
 				free_arg(arg);
 				free(buf);
-				perror("Error");
+				print_err(info);
 				return (127);
 			}
 			actual_cmd = getpath(cmd);

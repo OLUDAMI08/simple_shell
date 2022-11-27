@@ -7,15 +7,18 @@
  * Return: Always zero
  */
 
-int main(int ac, char **argv)
+int main(int ac, char **av)
 {
-	char *lineptr = NULL;
+	char  **argv, *lineptr = NULL;
 	ssize_t n_read;
 	const char *delim = " \t\a\r\n";
 	int exitstatus = 0;
+	info_t info[] = {NULL, 0, NULL};
+	static int hc = 0;
 	(void)ac;
 
 	signal(SIGINT, SIG_IGN);
+	info->shell_name = av[0];
 	while (1)
 	{
 		prompt();
@@ -23,6 +26,8 @@ int main(int ac, char **argv)
 		n_read = _strlen(lineptr) + 1;
 		if (lineptr != NULL)
 		{
+			info->histcount = ++hc;
+			info->cmd_name = lineptr;
 			argv = getcmd(lineptr, delim, n_read);
 			if (argv == NULL)
 			{
@@ -35,7 +40,7 @@ int main(int ac, char **argv)
 				free_arg(argv);
 				continue;
 			}
-			exitstatus = execmd(argv, lineptr);
+			exitstatus = execmd(argv, lineptr, info);
 		}
 		else
 			free(lineptr);
