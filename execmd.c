@@ -27,19 +27,19 @@ int execmd(char **arg, char *buf, info_t *info)
 			PATH = _getenv("PATH");
 			if (PATH == NULL || !_strlen(PATH))
 			{
+				print_err(info);
 				free_arg(arg);
 				free(buf);
-				print_err(info);
 				return (127);
 			}
 			actual_cmd = getpath(cmd);
 		}
 		if (actual_cmd == NULL)
 		{
+			print_err(info);
 			free(actual_cmd);
 			free_arg(arg);
 			free(buf);
-			perror("Error");
 			return (127);
 		}
 
