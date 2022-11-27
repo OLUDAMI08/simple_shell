@@ -27,6 +27,9 @@ char *_strstr(char *haystack, char *needle);
 char *makemem(size_t memsize);
 void free_arg(char **arg);
 int errputs(char *s);
+#define INFO_INIT \
+{NULL, 0, NULL}
+
 typedef struct info
 {
 	char *shell_name;

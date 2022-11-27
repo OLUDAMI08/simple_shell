@@ -13,7 +13,7 @@ int main(int ac, char **av)
 	ssize_t n_read;
 	const char *delim = " \t\a\r\n";
 	int exitstatus = 0;
-	info_t info[] = {NULL, 0, NULL};
+	info_t info[] = { INFO_INIT };
 	static int hc = 0;
 	(void)ac;
 
