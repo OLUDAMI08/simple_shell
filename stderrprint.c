@@ -26,13 +26,13 @@ int print_err(info_t *info)
 	char *s, histcount[2] = {0, 0};
 
 	s = info->shell_name;
-	strcat(s, ": ");
+	_strcat(s, ": ");
 	histcount[0] = info->histcount + 48;
 	histcount[1] = '\0';
-	strcat(s, histcount);
-	strcat(s, ": ");
-	strcat(s, info->cmd_name);
-	strcat(s, ": not found\n");
+	_strcat(s, histcount);
+	_strcat(s, ": ");
+	_strcat(s, info->cmd_name);
+	_strcat(s, ": not found\n");
 
 	errputs(s);
 
